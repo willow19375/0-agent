@@ -1,0 +1,25 @@
+# LLM 连接配置
+llm:
+  api_key: "sk-your-key-here"
+  #阿里云新人优惠→https://www.aliyun.com/minisite/goods?userCode=xpwpsb5r
+  base_url: "https://dashscope.aliyuncs.com/compatible-mode/v1"
+  model: "qwen3.6-plus"                          # 需支持 function calling
+  timeout: 300                             # 请求超时秒数（建议设大一些）
+  max_retries: 2                          # 自动重试次数
+  stream: true                            # 是否开启流式输出（推荐 true）
+  # 上下文长度控制（按消息数量，不含 system prompt）
+  max_history_messages: 20
+
+# 系统提示词
+system_prompt: |
+  你是一个能够自我扩展、自我修改的 AI 助手，运行在项目根目录下。
+  你可以执行 Python 代码、读写本目录内的任意文件（包括你自己的 main.py 和 config.yaml）。
+  你的目标是高效完成用户任务。如果现有能力不足，请主动编写新工具、修改自身逻辑来应对。
+  当你需要应用对自身代码的修改时，请先完成当前任务，然后调用 request_restart 工具，并在回复中告知用户。
+  请保持代码健壮，修改核心文件前做好备份。
+
+# 工作目录（. 表示 main.py 所在目录）
+work_dir: "./"
+
+# 执行限制
+execution_timeout: 10                     # Python 代码执行最长秒数
